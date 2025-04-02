@@ -1,5 +1,79 @@
 # Docker for Data Science Projects - Workshop Guide
 
+## Table of Contents
+<details>
+  <summary><a href="#1-docker-concepts"><i><b>1. Docker Concepts</b></i></a></summary>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-dockerfile">1.1. Dockerfile</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-build-command">1.2. Build Command</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-docker-image">1.3. Docker Image</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-run-command">1.4. Run Command</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-docker-container">1.5. Docker Container</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-docker-ignore-dockerignore">1.6. Docker Ignore (.dockerignore)</a><br>
+  </div>
+</details>
+&nbsp;
+
+<details>
+  <summary><a href="#2-installing-docker"><i><b>2. Installing Docker</b></i></a></summary>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-installing-docker-on-ubuntu">2.1. Installing Docker on Ubuntu</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-installing-docker-on-windows">2.2. Installing Docker on Windows</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-after-installing-docker">2.3. After Installing Docker</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-automating-docker-startup-in-wsl">2.4. Automating Docker Startup in WSL</a><br>
+  </div>
+</details>
+&nbsp;
+
+<details>
+  <summary><a href="#3-setting-up-docker-for-a-data-science-project"><i><b>3. Setting Up Docker for a Data Science Project</b></i></a></summary>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-step-1-install-prerequisites">3.1. Step 1: Install Prerequisites</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-step-2-set-up-your-project-repository">3.2. Step 2: Set Up Your Project Repository</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-step-3-write-the-dockerfile">3.3. Step 3: Write the Dockerfile</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-step-4-write-the-dockerignore-file">3.4. Step 4: Write the .dockerignore file</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-step-5-write-the-docker-compose-file">3.5. Step 5: Write the Docker Compose File</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#36-step-6-requirementstxt">3.6. Step 6: requirements.txt</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#37-step-7-build-and-run-your-container">3.7. Step 7: Build and Run Your Container</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#38-step-8-verify-the-container">3.8. Step 8: Verify the Container</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#39-step-9-attach-vs-code-to-the-container">3.9. Step 9: Attach VS Code to the Container</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#310-step-10-run-the-python-script">3.10. Step 10: Run the Python Script</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#311-step-11-work-with-jupyter-notebooks-in-vs-code">3.11. Step 11: Work with Jupyter Notebooks in VS Code</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#312-step-12-stop-and-remove-the-container">3.12. Step 12: Stop and remove the container</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#313-note-1-jupyter-on-browser">3.13. Note 1: Jupyter on browser</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#314-note2-keeping-your-environment-up-to-date">3.14. Note2: Keeping Your Environment Up-to-Date</a><br>
+  </div>
+</details>
+&nbsp;
+
+<details>
+  <summary><a href="#4-essential-docker-commands"><i><b>4. Essential Docker Commands</b></i></a></summary>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-managing-images">4.1. Managing Images</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-managing-containers">4.2. Managing Containers</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-port-mapping-commands">4.3. Port Mapping Commands</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44-working-with-containers">4.4. Working with Containers</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#45-custom-container-names">4.5. Custom Container Names</a><br>
+  </div>
+</details>
+&nbsp;
+
+<details>
+  <summary><a href="#5-advanced-topics-and-faq"><i><b>5. Advanced Topics and FAQ</b></i></a></summary>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-understanding-network-ports">5.1. Understanding Network Ports</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52-docker-port-mapping-in-detail">5.2. Docker Port Mapping in Detail</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#53-common-issues-and-solutions">5.3. Common Issues and Solutions</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#54-data-science-specific-considerations">5.4. Data Science Specific Considerations</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#55-docker-shortcuts-alias">5.5. Docker Shortcuts (alias)</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#56-understanding-and-cleaning-dangling-images">5.6. Understanding and Cleaning Dangling Images</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#57-tagging-docker-images">5.7. Tagging Docker Images</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#58-working-with-docker-volumes">5.8. Working with Docker Volumes</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#59-frequently-asked-questions-faq">5.9. Frequently Asked Questions (FAQ)</a><br>
+  </div>
+</details>
+&nbsp;
+
 ## 1. Docker Concepts
 
 <div align="center">
@@ -126,7 +200,7 @@ sudo systemctl enable docker
 sudo service docker start
 ```
 
-**Note for WSL users**: 
+**Note for WSL users**:
 WSL does not use systemd, so `systemctl` commands don't work inside WSL. In WSL, you'll need to run `sudo service docker start` each time you boot your laptop. You can automate this with a script or alias.
 
 ```bash
@@ -153,39 +227,46 @@ docker ps
 In WSL, the `sudo systemctl enable docker` command doesn't work because WSL doesn't use systemd. Here are options to start Docker automatically:
 
 #### Option 1: Manual
+
 If you're okay with typing a command daily, just stick with:
+
 ```bash
 sudo service docker start
 ```
 
 #### Option 2: Using an alias
+
 Create an alias to shorten the command:
+
 ```bash
 echo 'alias start-docker="sudo service docker start"' >> ~/.bashrc
 source ~/.bashrc
 ```
+
 Now, you can just type:
+
 ```bash
 start-docker
 ```
 
 #### Option 3: Automatic
+
 To start Docker automatically when you open WSL:
 
 1. Open WSL and edit the WSL configuration file:
+
    ```bash
    sudo nano /etc/wsl.conf
    ```
-
 2. Add the following lines:
+
    ```
    [boot]
    command="service docker start"
    ```
-
 3. Save the file (Ctrl + X, then Y, then Enter).
+4. Restart WSL:
 
-4. Restart WSL:   
    ```bash
    wsl --shutdown
    ```
@@ -438,6 +519,7 @@ docker run -d --name <arbitrary-name> -p 80:80 <image-name>
 ```
 
 Example:
+
 ```
 docker run -d --name webserver -p 80:80 nginx
 ```
@@ -447,34 +529,38 @@ docker run -d --name webserver -p 80:80 nginx
 ### 5.1. Understanding Network Ports
 
 <div align="center">
-    <img src="figures/port.jpg" alt="port" width="50%">
+    <img src="figures/port.jpg" alt="port" width="30%">
 </div>
 
 In networking:
+
 - IP address identifies which device you're communicating with ("who")
 - Port number specifies which service or application on that device ("what")
 
 For example, when you access: `google.com => 215.114.85.17:80`
+
 - `215.114.85.17` is Google's IP address (who you're talking to)
 - `80` is the port number for HTTP (what service you're requesting)
 
 Ports can range from `0` to `65,535` (2^16 - 1), with standard services typically using well-known ports:
 
 - Web servers:
+
   - HTTP: port `80`
   - HTTPS: port `443`
-
 - Development servers:
+
   - FastAPI: port `8000`
   - Jupyter: port `8888`
   - SSH: port `22`
-
 - Database Management Systems (DBMS):
+
   - MySQL: port `3306`
   - PostgreSQL: port `5432`
   - MongoDB: port `27017`
 
 **Important Notes on Database Ports:**
+
 - Databases themselves don't have ports; the Database Management Systems (DBMS) do.
 - All databases within a single DBMS instance typically use the same port.
 - If you want to run two versions of the same DBMS on one server, you must use different ports.
@@ -483,16 +569,19 @@ Ports can range from `0` to `65,535` (2^16 - 1), with standard services typicall
 ### 5.2. Docker Port Mapping in Detail
 
 The port mapping in Docker (`-p 80:80`) allows you to:
+
 1. Access containerized services from your host machine
 2. Run multiple instances of the same service on different host ports
 3. Avoid port conflicts when multiple containers need the same internal port
 
 With these commands:
+
 - First container: access via `localhost:80` in browser
 - Second container: access via `localhost:8080` in browser
 - Both containers are running nginx on their internal port `80`
 
 This approach is especially useful for data science projects when you need to:
+
 - Run multiple Jupyter servers
 - Access databases from both containerized applications and host tools
 - Expose machine learning model APIs
@@ -500,18 +589,23 @@ This approach is especially useful for data science projects when you need to:
 ### 5.3. Common Issues and Solutions
 
 #### Container Won't Start
+
 If your container won't start, check:
+
 - Port conflicts: Is another service using the same port?
 - Resource limitations: Do you have enough memory/CPU?
 - Permission issues: Are volume mounts correctly configured?
 
 #### File Permissions Issues
+
 When using volume mounts, file permission issues can occur. Solutions:
+
 - Use the `--user` flag when running the container
 - Set appropriate permissions in the Dockerfile
 - Use Docker Compose's `user` option
 
 #### Performance Considerations
+
 - Use `.dockerignore` to reduce build context size
 - Minimize the number of layers in your Dockerfile
 - Consider multi-stage builds for smaller images
@@ -519,19 +613,25 @@ When using volume mounts, file permission issues can occur. Solutions:
 ### 5.4. Data Science Specific Considerations
 
 #### Jupyter Notebook Security
+
 For production:
+
 - Don't use `--NotebookApp.token=''`
 - Set up proper authentication
 - Use HTTPS for connections
 
 #### GPU Support
+
 For deep learning:
+
 - Install NVIDIA Container Toolkit
 - Use the `--gpus all` flag with docker run
 - Use appropriate base images (e.g., tensorflow/tensorflow:latest-gpu)
 
 #### Large Data Files
+
 When working with large datasets:
+
 - Don't include data in the Docker image
 - Use volume mounts for data directories
 - Consider using data volumes or bind mounts
@@ -566,20 +666,24 @@ alias dcd="   docker compose down"
 These shortcuts provide:
 
 #### Better Formatted Output
+
 - `di`: Lists images with formatted output showing ID, repository, tag, size, and age
 - `dps`/`dpsa`: Shows running/all containers with formatted output
 
 #### Bulk Operations
+
 - `drmia`: Removes all images
 - `drmif`: Removes only "dangling" images (untagged images)
 - `dsta`/`dspa`: Starts/stops all containers
 - `drma`: Removes all containers
 
 #### Shorter Commands
+
 - `dst`/`dsp`: Quick container start/stop
 - `dcu`/`dcd`: Docker compose up/down with build and detached mode
 
 To use these aliases:
+
 1. Add the code block to your shell profile file (~/.bashrc or ~/.zshrc)
 2. Run `source ~/.bashrc` or `source ~/.zshrc` to apply changes
 3. Start using the shortened commands
@@ -607,6 +711,7 @@ These are called "dangling images" and they typically appear in these scenarios:
 #### Why should you care?
 
 Dangling images:
+
 - Take up disk space unnecessarily
 - Make your image list harder to read
 - Serve no practical purpose
@@ -658,12 +763,14 @@ docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 #### Examples
 
 **Simple version tagging:**
+
 ```bash
 # Tag the current 'latest' image with a version number
 docker tag my-datascience-app:latest my-datascience-app:v1.0
 ```
 
 **Preparing for Docker Hub:**
+
 ```bash
 # Tag for pushing to Docker Hub
 docker tag my-datascience-app:latest username/my-datascience-app:v1.0
@@ -673,6 +780,7 @@ docker push username/my-datascience-app:v1.0
 ```
 
 **Multiple tags for different environments:**
+
 ```bash
 # Create production-ready tag
 docker tag my-ml-model:v1.2.3 my-ml-model:prod
@@ -700,7 +808,7 @@ Proper tagging helps you maintain reproducibility and track which model version 
 By default, when a container is stopped or removed, all data inside it is lost. Docker volumes solve this problem by providing persistent storage that exists outside of containers.
 
 <div align="center">
-    <img src="figures/volume.jpg" alt="volume" width="50%">
+    <img src="figures/volume.jpg" alt="volume" width="30%">
 </div>
 
 #### Why Use Volumes?
@@ -713,6 +821,7 @@ By default, when a container is stopped or removed, all data inside it is lost. 
 #### Basic Volume Usage
 
 **Syntax for mounting volumes:**
+
 ```bash
 docker run -v /host/path:/container/path[:options] image_name
 ```
@@ -722,6 +831,7 @@ docker run -v /host/path:/container/path[:options] image_name
 **Example 1: Exploring a Container's Default Storage**
 
 First, let's see what's inside a container without volumes:
+
 ```bash
 # Start an nginx container
 docker run -d --name nginx-test -p 80:80 nginx
@@ -737,6 +847,7 @@ ls -la
 **Example 2: Using a Volume for Persistence**
 
 Now let's mount a local directory to nginx's web directory:
+
 ```bash
 docker run -d -p 3000:80 -v /home/username/projects/my-website:/usr/share/nginx/html nginx
 ```
@@ -758,11 +869,13 @@ This prevents the container from modifying files in your local directory.
 For data science projects, volumes are particularly useful for:
 
 **Persisting Jupyter notebooks and data:**
+
 ```bash
 docker run -d -p 8888:8888 -v /home/username/ds-project:/app jupyter/datascience-notebook
 ```
 
 **Sharing datasets between containers:**
+
 ```bash
 # Create a named volume
 docker volume create dataset-vol
@@ -773,6 +886,7 @@ docker run -d --name inference -v dataset-vol:/data inference-image
 ```
 
 **Storing model artifacts:**
+
 ```bash
 docker run -d -p 8501:8501 -v /home/username/models:/models -e MODEL_PATH=/models/my_model ml-serving-image
 ```
@@ -780,17 +894,18 @@ docker run -d -p 8501:8501 -v /home/username/models:/models -e MODEL_PATH=/model
 #### Volume Types in Docker
 
 1. **Named Volumes** (managed by Docker):
+
    ```bash
    docker volume create my-volume
    docker run -v my-volume:/container/path image_name
    ```
-
 2. **Bind Mounts** (direct mapping to host):
+
    ```bash
    docker run -v /absolute/host/path:/container/path image_name
    ```
-
 3. **Tmpfs Mounts** (stored in host memory):
+
    ```bash
    docker run --tmpfs /container/path image_name
    ```
@@ -808,24 +923,28 @@ Volumes are essential for any data science workflow, ensuring your data, code, a
 Each environment management tool serves different needs and complexity levels:
 
 **Python venv**:
+
 - **What**: Lightweight built-in Python tool for isolated environments
 - **Best for**: Simple Python projects with minimal dependencies
 - **Pros**: Easy to use, minimal overhead, standard Python tool
 - **Cons**: Only handles Python packages, no system-level isolation
 
 **Conda**:
+
 - **What**: Cross-platform package and environment manager
 - **Best for**: Data science projects with complex dependencies across languages
 - **Pros**: Manages both Python and non-Python packages (e.g., C libraries)
 - **Cons**: Heavier than venv, slower package resolution
 
 **Docker**:
+
 - **What**: Complete containerization platform with full system isolation
 - **Best for**: Production deployments, ensuring consistency across environments
 - **Pros**: Full isolation including OS, reproducible environments, scalable
 - **Cons**: Steeper learning curve, more resource-intensive
 
 **When to choose Docker for data science**:
+
 - Working in teams with different operating systems
 - Projects requiring specific system configurations
 - Deploying models to production
@@ -836,16 +955,17 @@ Each environment management tool serves different needs and complexity levels:
 **Recommended Workflow**:
 
 1. **First**: Clone the repository
+
    ```bash
    git clone https://github.com/username/project.git
    cd project
    ```
-
 2. **Second**: Create your environment
+
    ```bash
    # For Docker
    docker-compose up -d --build
-   
+
    # For venv
    python -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
@@ -853,6 +973,7 @@ Each environment management tool serves different needs and complexity levels:
    ```
 
 **Why this order works best**:
+
 - The repository often contains environment configuration files
 - Environment setup instructions are typically in the README
 - Environment files like `requirements.txt` or `Dockerfile` come from the repo
@@ -862,12 +983,14 @@ Each environment management tool serves different needs and complexity levels:
 When starting a new data science project, version selection can be challenging. A practical approach is to use versions from Google Colab, which maintains stable, compatible combinations of libraries.
 
 **Steps to check Colab versions**:
+
 ```python
 # In a Colab notebook
 !pip list | grep -E 'pandas|numpy|scikit-learn|matplotlib|tensorflow'
 ```
 
 **Current recommended versions** (as of 2024):
+
 ```
 numpy                              2.0.2
 pandas                             2.2.2
@@ -880,6 +1003,7 @@ requests                           2.32.3
 ```
 
 **Best practices**:
+
 - Pin exact versions in requirements.txt: `numpy==2.0.2`
 - Consider compatibility more important than having the latest version
 - Test thoroughly when upgrading major versions
@@ -889,6 +1013,7 @@ requests                           2.32.3
 Each environment manager requires specific configuration files:
 
 **venv (Python Virtual Environment)**:
+
 - `requirements.txt`: Lists Python package dependencies
   ```
   numpy==2.0.2
@@ -897,6 +1022,7 @@ Each environment manager requires specific configuration files:
   ```
 
 **Conda**:
+
 - `environment.yml`: Defines Conda environment with all dependencies
   ```yaml
   name: myproject
@@ -911,6 +1037,7 @@ Each environment manager requires specific configuration files:
 - `requirements.txt`: Often used alongside environment.yml
 
 **Docker**:
+
 - `Dockerfile`: Defines the container image
 - `docker-compose.yml`: Configures services, networks, volumes
 - `requirements.txt`: Lists Python packages to install in the container
@@ -923,19 +1050,18 @@ For projects that might use different environments, include configuration files 
 Update your `requirements.txt` file:
 
 1. **After installing new packages**: Immediately capture the new dependency
+
    ```bash
    pip install new-package
    pip freeze > requirements.txt
    ```
-
 2. **Before committing significant changes**: Ensure environment reproducibility
-
 3. **When upgrading dependency versions**: Document the change
-
 4. **When removing unused packages**: Clean up dependencies
 
 **Inside Docker containers**:
 After installing new packages in a running container, update requirements.txt before rebuilding:
+
 ```bash
 # Inside the container
 pip install new-package
