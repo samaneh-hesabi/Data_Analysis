@@ -1,0 +1,11 @@
+services:
+  data-science:
+    build: .
+    image: data-science_image
+    container_name: data-science_container
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+    ports:
+      - "8888:8888" 
