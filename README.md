@@ -1,4 +1,4 @@
-# Docker for Data Science Projects - Workshop Guide
+# Docker for Data Science Projects
 
 ## Table of Contents
 
@@ -11,7 +11,6 @@
               <a href="#14-contents-of-this-repository">1.4. Contents of this Repository</a><br>
   </div>
 </details>
- 
 
 <details>
   <summary><a href="#2-docker-concepts"><i><b>2. Docker Concepts</b></i></a></summary>
@@ -24,7 +23,6 @@
               <a href="#26-docker-ignore-dockerignore">2.6. Docker Ignore (.dockerignore)</a><br>
   </div>
 </details>
- 
 
 <details>
   <summary><a href="#3-installing-docker"><i><b>3. Installing Docker</b></i></a></summary>
@@ -35,7 +33,6 @@
               <a href="#34-automating-docker-startup-in-wsl">3.4. Automating Docker Startup in WSL</a><br>
   </div>
 </details>
- 
 
 <details>
   <summary><a href="#4-setting-up-docker-for-a-data-science-project"><i><b>4. Setting Up Docker for a Data Science Project</b></i></a></summary>
@@ -56,7 +53,6 @@
               <a href="#414-note2-keeping-your-environment-up-to-date">4.14. Note2: Keeping Your Environment Up-to-Date</a><br>
   </div>
 </details>
- 
 
 <details>
   <summary><a href="#5-essential-docker-commands"><i><b>5. Essential Docker Commands</b></i></a></summary>
@@ -68,7 +64,6 @@
               <a href="#55-custom-container-names">5.5. Custom Container Names</a><br>
   </div>
 </details>
- 
 
 <details>
   <summary><a href="#6-advanced-topics-and-faq"><i><b>6. Advanced Topics and FAQ</b></i></a></summary>
@@ -84,7 +79,6 @@
               <a href="#69-frequently-asked-questions-faq">6.9. Frequently Asked Questions (FAQ)</a><br>
   </div>
 </details>
- 
 
 ## 1. About this Repository
 
@@ -109,9 +103,12 @@ By the end of this project, you will:
 
 This project is suitable for three types of learners:
 
-- **For those familiar with Docker:** You can dive straight into the data science applications. The examples and configurations provided will help you enhance your skills and explore best practices.
-- **For those who know Python/data science but are new to Docker:** This project will introduce you to containerization, guiding you through building and deploying reproducible environments.
-- **For beginners**: This project is designed with you in mind. You'll start with the basics, learning how to set up Docker and then move on to building data science applications in containers.
+- **For those familiar with Docker:**
+  - You can dive straight into the data science applications. The examples and configurations provided will help you enhance your skills and explore best practices.
+- **For those who know Python/data science but are new to Docker:**
+  - This project will introduce you to containerization, guiding you through building and deploying reproducible environments.
+- **For beginners**:
+- This project is designed with you in mind. You'll start with the basics, learning how to set up Docker and then move on to building data science applications in containers.
 
 ### 1.4. Contents of this Repository
 
@@ -119,17 +116,21 @@ This project is suitable for three types of learners:
 Folder PATH listing
 .
 +---data                          <-- Contains sample datasets
+|       README.md                 <-- Documentation for the data folder
 |       sample.csv                <-- Example dataset for experimentation
 |
 +---figures                       <-- Contains images for documentation
+|       README.md                 <-- Documentation for the figures folder
 |       docker.jpg                <-- Docker concepts illustration
 |       port.jpg                  <-- Network port illustration
 |       volume.jpg                <-- Docker volumes illustration
 |
 +---notebooks                     <-- Jupyter notebooks
+|       README.md                 <-- Documentation for the notebooks folder
 |       exploratory_analysis.ipynb <-- Sample notebook for data exploration
 |
 +---scripts                       <-- Python scripts
+|       README.md                 <-- Documentation for the scripts folder
 |       data_prep.py              <-- Sample data preparation script
 |
 |   .dockerignore                 <-- Files to exclude from Docker build
@@ -976,166 +977,3 @@ docker run -d -p 8501:8501 -v /home/username/models:/models -e MODEL_PATH=/model
    ```bash
    docker run --tmpfs /container/path image_name
    ```
-
-Volumes are essential for any data science workflow, ensuring your data, code, and models persist beyond the container lifecycle.
-
-### 6.9. Frequently Asked Questions (FAQ)
-
-#### Q1: Comparing Environment Managers: venv vs. Conda vs. Docker
-
-<div align="center">
-    <img src="figures/env_comparison.jpg" alt="environment comparison" width="70%">
-</div>
-
-Each environment management tool serves different needs and complexity levels:
-
-**Python venv**:
-
-- **What**: Lightweight built-in Python tool for isolated environments
-- **Best for**: Simple Python projects with minimal dependencies
-- **Pros**: Easy to use, minimal overhead, standard Python tool
-- **Cons**: Only handles Python packages, no system-level isolation
-
-**Conda**:
-
-- **What**: Cross-platform package and environment manager
-- **Best for**: Data science projects with complex dependencies across languages
-- **Pros**: Manages both Python and non-Python packages (e.g., C libraries)
-- **Cons**: Heavier than venv, slower package resolution
-
-**Docker**:
-
-- **What**: Complete containerization platform with full system isolation
-- **Best for**: Production deployments, ensuring consistency across environments
-- **Pros**: Full isolation including OS, reproducible environments, scalable
-- **Cons**: Steeper learning curve, more resource-intensive
-
-**When to choose Docker for data science**:
-
-- Working in teams with different operating systems
-- Projects requiring specific system configurations
-- Deploying models to production
-- Projects needing exact reproducibility long-term
-
-#### Q2: Project Setup Order: Repository Clone vs. Environment Creation
-
-**Recommended Workflow**:
-
-1. **First**: Clone the repository
-
-   ```bash
-   git clone https://github.com/username/project.git
-   cd project
-   ```
-2. **Second**: Create your environment
-
-   ```bash
-   # For Docker
-   docker-compose up -d --build
-
-   # For venv
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-
-**Why this order works best**:
-
-- The repository often contains environment configuration files
-- Environment setup instructions are typically in the README
-- Environment files like `requirements.txt` or `Dockerfile` come from the repo
-
-#### Q3: Choosing Python and Library Versions for Data Science Projects
-
-When starting a new data science project, version selection can be challenging. A practical approach is to use versions from Google Colab, which maintains stable, compatible combinations of libraries.
-
-**Steps to check Colab versions**:
-
-```python
-# In a Colab notebook
-!pip list | grep -E 'pandas|numpy|scikit-learn|matplotlib|tensorflow'
-```
-
-**Current recommended versions** (as of 2024):
-
-```
-numpy                              2.0.2
-pandas                             2.2.2
-scikit-learn                       1.6.1
-matplotlib                         3.10.0
-tensorflow                         2.18.0
-scipy                              1.14.1
-seaborn                            0.13.2
-requests                           2.32.3
-```
-
-**Best practices**:
-
-- Pin exact versions in requirements.txt: `numpy==2.0.2`
-- Consider compatibility more important than having the latest version
-- Test thoroughly when upgrading major versions
-
-#### Q4: Files for Project Reproducibility in Different Environments
-
-Each environment manager requires specific configuration files:
-
-**venv (Python Virtual Environment)**:
-
-- `requirements.txt`: Lists Python package dependencies
-  ```
-  numpy==2.0.2
-  pandas==2.2.2
-  scikit-learn==1.6.1
-  ```
-
-**Conda**:
-
-- `environment.yml`: Defines Conda environment with all dependencies
-  ```yaml
-  name: myproject
-  channels:
-    - conda-forge
-    - defaults
-  dependencies:
-    - python=3.9
-    - numpy=2.0.2
-    - pandas=2.2.2
-  ```
-- `requirements.txt`: Often used alongside environment.yml
-
-**Docker**:
-
-- `Dockerfile`: Defines the container image
-- `docker-compose.yml`: Configures services, networks, volumes
-- `requirements.txt`: Lists Python packages to install in the container
-
-**Multi-environment projects**:
-For projects that might use different environments, include configuration files for all potential methods to improve flexibility and adoption.
-
-#### Q5: When to Update requirements.txt
-
-Update your `requirements.txt` file:
-
-1. **After installing new packages**: Immediately capture the new dependency
-
-   ```bash
-   pip install new-package
-   pip freeze > requirements.txt
-   ```
-2. **Before committing significant changes**: Ensure environment reproducibility
-3. **When upgrading dependency versions**: Document the change
-4. **When removing unused packages**: Clean up dependencies
-
-**Inside Docker containers**:
-After installing new packages in a running container, update requirements.txt before rebuilding:
-
-```bash
-# Inside the container
-pip install new-package
-pip freeze > requirements.txt
-
-# On host
-docker-compose up --build -d
-```
-
-**Best practice**: Include the requirement update step in your development workflow documentation to maintain consistent environments across the team.
