@@ -1,78 +1,79 @@
-# Docker for Data Science Projects - Workshop Guide
+# Docker for Data Science Projects
 
 ## Table of Contents
+
 <details>
   <summary><a href="#1-docker-concepts"><i><b>1. Docker Concepts</b></i></a></summary>
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-dockerfile">1.1. Dockerfile</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-build-command">1.2. Build Command</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-docker-image">1.3. Docker Image</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-run-command">1.4. Run Command</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-docker-container">1.5. Docker Container</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-docker-ignore-dockerignore">1.6. Docker Ignore (.dockerignore)</a><br>
+              <a href="#11-dockerfile">1.1. Dockerfile</a><br>
+              <a href="#12-build-command">1.2. Build Command</a><br>
+              <a href="#13-docker-image">1.3. Docker Image</a><br>
+              <a href="#14-run-command">1.4. Run Command</a><br>
+              <a href="#15-docker-container">1.5. Docker Container</a><br>
+              <a href="#16-docker-ignore-dockerignore">1.6. Docker Ignore (.dockerignore)</a><br>
   </div>
 </details>
-&nbsp;
+ 
 
 <details>
   <summary><a href="#2-installing-docker"><i><b>2. Installing Docker</b></i></a></summary>
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-installing-docker-on-ubuntu">2.1. Installing Docker on Ubuntu</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-installing-docker-on-windows">2.2. Installing Docker on Windows</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-after-installing-docker">2.3. After Installing Docker</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-automating-docker-startup-in-wsl">2.4. Automating Docker Startup in WSL</a><br>
+              <a href="#21-installing-docker-on-ubuntu">2.1. Installing Docker on Ubuntu</a><br>
+              <a href="#22-installing-docker-on-windows">2.2. Installing Docker on Windows</a><br>
+              <a href="#23-after-installing-docker">2.3. After Installing Docker</a><br>
+              <a href="#24-automating-docker-startup-in-wsl">2.4. Automating Docker Startup in WSL</a><br>
   </div>
 </details>
-&nbsp;
+ 
 
 <details>
   <summary><a href="#3-setting-up-docker-for-a-data-science-project"><i><b>3. Setting Up Docker for a Data Science Project</b></i></a></summary>
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-step-1-install-prerequisites">3.1. Step 1: Install Prerequisites</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-step-2-set-up-your-project-repository">3.2. Step 2: Set Up Your Project Repository</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-step-3-write-the-dockerfile">3.3. Step 3: Write the Dockerfile</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-step-4-write-the-dockerignore-file">3.4. Step 4: Write the .dockerignore file</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-step-5-write-the-docker-compose-file">3.5. Step 5: Write the Docker Compose File</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#36-step-6-requirementstxt">3.6. Step 6: requirements.txt</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#37-step-7-build-and-run-your-container">3.7. Step 7: Build and Run Your Container</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#38-step-8-verify-the-container">3.8. Step 8: Verify the Container</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#39-step-9-attach-vs-code-to-the-container">3.9. Step 9: Attach VS Code to the Container</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#310-step-10-run-the-python-script">3.10. Step 10: Run the Python Script</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#311-step-11-work-with-jupyter-notebooks-in-vs-code">3.11. Step 11: Work with Jupyter Notebooks in VS Code</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#312-step-12-stop-and-remove-the-container">3.12. Step 12: Stop and remove the container</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#313-note-1-jupyter-on-browser">3.13. Note 1: Jupyter on browser</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#314-note2-keeping-your-environment-up-to-date">3.14. Note2: Keeping Your Environment Up-to-Date</a><br>
+              <a href="#31-step-1-install-prerequisites">3.1. Step 1: Install Prerequisites</a><br>
+              <a href="#32-step-2-set-up-your-project-repository">3.2. Step 2: Set Up Your Project Repository</a><br>
+              <a href="#33-step-3-write-the-dockerfile">3.3. Step 3: Write the Dockerfile</a><br>
+              <a href="#34-step-4-write-the-dockerignore-file">3.4. Step 4: Write the .dockerignore file</a><br>
+              <a href="#35-step-5-write-the-docker-compose-file">3.5. Step 5: Write the Docker Compose File</a><br>
+              <a href="#36-step-6-requirementstxt">3.6. Step 6: requirements.txt</a><br>
+              <a href="#37-step-7-build-and-run-your-container">3.7. Step 7: Build and Run Your Container</a><br>
+              <a href="#38-step-8-verify-the-container">3.8. Step 8: Verify the Container</a><br>
+              <a href="#39-step-9-attach-vs-code-to-the-container">3.9. Step 9: Attach VS Code to the Container</a><br>
+              <a href="#310-step-10-run-the-python-script">3.10. Step 10: Run the Python Script</a><br>
+              <a href="#311-step-11-work-with-jupyter-notebooks-in-vs-code">3.11. Step 11: Work with Jupyter Notebooks in VS Code</a><br>
+              <a href="#312-step-12-stop-and-remove-the-container">3.12. Step 12: Stop and remove the container</a><br>
+              <a href="#313-note-1-jupyter-on-browser">3.13. Note 1: Jupyter on browser</a><br>
+              <a href="#314-note2-keeping-your-environment-up-to-date">3.14. Note2: Keeping Your Environment Up-to-Date</a><br>
   </div>
 </details>
-&nbsp;
+ 
 
 <details>
   <summary><a href="#4-essential-docker-commands"><i><b>4. Essential Docker Commands</b></i></a></summary>
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-managing-images">4.1. Managing Images</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-managing-containers">4.2. Managing Containers</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-port-mapping-commands">4.3. Port Mapping Commands</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44-working-with-containers">4.4. Working with Containers</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#45-custom-container-names">4.5. Custom Container Names</a><br>
+              <a href="#41-managing-images">4.1. Managing Images</a><br>
+              <a href="#42-managing-containers">4.2. Managing Containers</a><br>
+              <a href="#43-port-mapping-commands">4.3. Port Mapping Commands</a><br>
+              <a href="#44-working-with-containers">4.4. Working with Containers</a><br>
+              <a href="#45-custom-container-names">4.5. Custom Container Names</a><br>
   </div>
 </details>
-&nbsp;
+ 
 
 <details>
   <summary><a href="#5-advanced-topics-and-faq"><i><b>5. Advanced Topics and FAQ</b></i></a></summary>
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-understanding-network-ports">5.1. Understanding Network Ports</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52-docker-port-mapping-in-detail">5.2. Docker Port Mapping in Detail</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#53-common-issues-and-solutions">5.3. Common Issues and Solutions</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#54-data-science-specific-considerations">5.4. Data Science Specific Considerations</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#55-docker-shortcuts-alias">5.5. Docker Shortcuts (alias)</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#56-understanding-and-cleaning-dangling-images">5.6. Understanding and Cleaning Dangling Images</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#57-tagging-docker-images">5.7. Tagging Docker Images</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#58-working-with-docker-volumes">5.8. Working with Docker Volumes</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#59-frequently-asked-questions-faq">5.9. Frequently Asked Questions (FAQ)</a><br>
+              <a href="#51-understanding-network-ports">5.1. Understanding Network Ports</a><br>
+              <a href="#52-docker-port-mapping-in-detail">5.2. Docker Port Mapping in Detail</a><br>
+              <a href="#53-common-issues-and-solutions">5.3. Common Issues and Solutions</a><br>
+              <a href="#54-data-science-specific-considerations">5.4. Data Science Specific Considerations</a><br>
+              <a href="#55-docker-shortcuts-alias">5.5. Docker Shortcuts (alias)</a><br>
+              <a href="#56-understanding-and-cleaning-dangling-images">5.6. Understanding and Cleaning Dangling Images</a><br>
+              <a href="#57-tagging-docker-images">5.7. Tagging Docker Images</a><br>
+              <a href="#58-working-with-docker-volumes">5.8. Working with Docker Volumes</a><br>
+              <a href="#59-frequently-asked-questions-faq">5.9. Frequently Asked Questions (FAQ)</a><br>
   </div>
 </details>
-&nbsp;
+ 
 
 ## 1. Docker Concepts
 
@@ -290,8 +291,8 @@ This guide creates a portable and reproducible Docker project template that lets
   - .dockerignore
   - docker-compose.yml
   - requirements.txt
-  - aaa.py
-  - bbb.ipynb
+  - data_prep.py
+  - exploratory_analysis.ipynb
 
 ### 3.3. Step 3: Write the Dockerfile
 
@@ -384,21 +385,21 @@ Make sure the container status is "Up" and port 8888 is mapped.
 - Open VS Code and press Ctrl+Shift+P.
 - Select "Dev Containers: Attach to Running Container…".
 - Choose the container named "your-project_container".  A new VS Code window will be opened.
-- In VS Code, press open folder. Then, in the top box, you will see /root. Delete root to see app. Finally, you will see all your project files, including aaa.py and bbb.ipynb.
+- In VS Code, press open folder. Then, in the top box, you will see /root. Delete root to see app. Finally, you will see all your project files, including data_prep.py and exploratory_analysis.ipynb.
 
 ### 3.10. Step 10: Run the Python Script
 
 In the VS Code terminal (inside the container), run:
 
 ```
-python aaa.py
+python data_prep.py
 ```
 
 You should see the expected output (for example, "hi").
 
 ### 3.11. Step 11: Work with Jupyter Notebooks in VS Code
 
-- Open bbb.ipynb in VS Code.
+- Open exploratory_analysis.ipynb in VS Code.
 - In VS Code, install the following extensions: Docker, Dev Containers, Python, Jupyter.
 - VS Code will prompt you to select a kernel. Choose the Python kernel that is specified in the Dockerfile. The Libraries that have been listed in the requirements.txt and installed in the docker will be run automatically.
 - Now you can run and edit cells directly in VS Code.
