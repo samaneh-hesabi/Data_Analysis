@@ -1,5 +1,9 @@
 # Docker for Data Science Projects
 
+<div align="center">
+    <img src="figures/logo.png" alt="logo" width="30%">
+</div>
+
 ## Table of Contents
 
 <details>
