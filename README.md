@@ -1,8 +1,10 @@
+<div align="center">
+    <img src="figures/logo.png" alt="logo" width="50%">
+</div>
+
 # Docker for Data Science Projects
 
-<div align="center">
-    <img src="figures/logo.png" alt="logo" width="30%">
-</div>
+QuickStart template for data science projects using Docker instead of Conda or venv.
 
 ## Table of Contents
 
@@ -601,7 +603,7 @@ docker run -d --name webserver -p 80:80 nginx
 ### 6.1. Understanding Network Ports
 
 <div align="center">
-    <img src="figures/port.jpg" alt="port" width="30%">
+    <img src="figures/port.jpg" alt="port" width="50%">
 </div>
 
 In networking:
@@ -880,7 +882,7 @@ Proper tagging helps you maintain reproducibility and track which model version 
 By default, when a container is stopped or removed, all data inside it is lost. Docker volumes solve this problem by providing persistent storage that exists outside of containers.
 
 <div align="center">
-    <img src="figures/volume.jpg" alt="volume" width="30%">
+    <img src="figures/volume.jpg" alt="volume" width="50%">
 </div>
 
 #### Why Use Volumes?
