@@ -188,7 +188,7 @@ This command creates a container from an image.
 - This command is usually long and complex, and differs for each image. Therefore, it's not easy to memorize.
 - docker-compose.yml file: To solve the run command problem, this command is written in a yml file and placed in the root of the image. From now on, the work becomes simple because with a simple command (constant for all images), a container can be started and stopped.
   ```
-  docker-compose up --build
+  docker-compose up --build -d
   docker-compose down
   ```
 - Writing the docker-compose.yml file is practically the hardest part of Docker and has its own specific points for each project. We have prepared this file for everyday data science tasks, which follows. For other projects, such as a website, you need to learn specifically for that task. ChatGPT can also be very helpful.
