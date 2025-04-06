@@ -12,7 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install notebook jupyterlab
 
 # Register the container's Python kernel
-RUN python -m ipykernel install --name container-env --display-name "Python $(python -c 'import sys; print(sys.version.split()[0])') (container)"
+RUN version=$(python -c "import sys; print(sys.version.split()[0])") && \
+    python -m ipykernel install --name container-env --display-name "Python ${version} (container)"
 
 # Expose port 8888 for Jupyter
 EXPOSE 8888
