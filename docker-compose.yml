@@ -1,11 +1,11 @@
 services:
-  data-science:
+  data-science-project:
     build: .
-    image: data-science_image
-    container_name: data-science_container
+    image: data-science-project
+    container_name: data-science-project
     volumes:
       - .:/app
     stdin_open: true
     tty: true
     ports:
-      - "8888:8888" 
+      - "8888:8888" # Jupyter Notebook
