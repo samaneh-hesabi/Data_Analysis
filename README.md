@@ -437,26 +437,28 @@ Stick to requirements.txt for best compatibility and performance.
 
 On your host machine (in the project folder), you have two options:
 
-**First (recommended):**
-This method extracts the project name to use as the image and container names.
+* **First (recommended):**
+  This method extracts the project name to use as the image and container names.
 
-To make start.sh executable if it is not:
-```bash
-chmod +x start.sh 
-```
+  To make start.sh executable if it is not:
 
-To extracts the project name and then build the image and run the container:
-```bash
-./start.sh 
-```
+  ```bash
+  chmod +x start.sh 
+  ```
 
-**Second:**
-In this method, the image and container names default to `data-science-project`.
-```bash
-docker-compose up --build -d
-```
+  To extracts the project name and then build the image and run the container:
 
-**Note:** 
+  ```bash
+  ./start.sh 
+  ```
+* **Second:**    
+  In this method, the image and container names default to `data-science-project`.
+
+  ```bash
+  docker-compose up --build -d
+  ```
+
+**Note:**
 
 * `--build`: "We could omit "--build", but then changes to Dockerfile or dependencies would not be applied.
 * `-d`: The "-d" flag runs the container in detached mode, allowing you to continue using the terminal for other tasks.
