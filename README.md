@@ -715,13 +715,13 @@ When working with large datasets:
 Add these aliases to your `.bashrc` or `.zshrc` file to make Docker commands more convenient:
 
 ```bash
-# -- Image Management --
+# --- Image Management ---
 alias di="    docker images --format 'table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}'"
 alias drmi="  docker rmi"
 alias drmia=" docker rmi   $(docker images -aq)"    # Remove all images
 alias drmif=" docker rmi   $(docker images -q -f dangling=true)"  # Remove dangling images
 
-# -- Container Management --
+# --- Container Management ---
 alias dps="   docker ps     --format 'table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'"
 alias dpsa="  docker ps -a  --format 'table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'"
 alias dpsaq=" docker ps -aq --format 'table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'"
@@ -732,9 +732,14 @@ alias dspa="  docker stop  $(docker ps -aq)"
 alias drm="   docker rm"
 alias drma="  docker rm    $(docker ps -aq)"
 
-# -- Docker Compose Commands --
+# --- Docker Compose Commands ---
 alias dcu="   docker compose up   -d --build"
 alias dcd="   docker compose down"
+
+# --- Docker Exec Bash ---
+deb() {
+  docker exec -it "$1" bash
+}
 ```
 
 These shortcuts provide:
