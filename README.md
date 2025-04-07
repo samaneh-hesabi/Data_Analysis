@@ -420,9 +420,10 @@ In lines 2, 3, and 4, replace your-project with your project's name, for example
 
 ### 4.6. Step 6: requirements.txt
 
-Ensure the project has a ***clean*** requirements.txt file ***like this***:
+It's important to keep the `requirements.txt` file clean and up-to-date. This ensures that all necessary dependencies are installed correctly and helps maintain compatibility and performance. The `ipykernel` package is crucial for Jupyter notebook functionality, so make sure it is included.
 
 ```
+ipykernel # This package is essential for running Jupyter notebooks.
 numpy==1.26.0
 pandas==2.1.3
 matplotlib==3.8.0
@@ -434,14 +435,31 @@ Stick to requirements.txt for best compatibility and performance.
 
 ### 4.7. Step 7: Build and Run Your Container
 
-On your host machine (in the project folder), run:
+On your host machine (in the project folder), you have two options:
 
+**First (recommended):**
+This method extracts the project name to use as the image and container names.
+
+To make start.sh executable if it is not:
+```bash
+chmod +x start.sh 
 ```
+
+To extracts the project name and then build the image and run the container:
+```bash
+./start.sh 
+```
+
+**Second:**
+In this method, the image and container names default to `data-science-project`.
+```bash
 docker-compose up --build -d
 ```
 
-This builds the container using the Dockerfile and starts it in detached mode.
-Note: We could omit "--build", but then changes to Dockerfile or dependencies would not be applied.
+**Note:** 
+
+* `--build`: "We could omit "--build", but then changes to Dockerfile or dependencies would not be applied.
+* `-d`: The "-d" flag runs the container in detached mode, allowing you to continue using the terminal for other tasks.
 
 ### 4.8. Step 8: Verify the Container
 
