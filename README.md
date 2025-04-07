@@ -735,31 +735,44 @@ When working with large datasets:
 Add these aliases to your `.bashrc` or `.zshrc` file to make Docker commands more convenient:
 
 ```bash
+#-----------------------------------------------------------------------------------------
+# Docker aliases
+
 # --- Image Management ---
-alias di="    docker images --format 'table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}'"
+alias di="    docker images    --format 'table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}'"
+alias dia="   docker images -a --format 'table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}'"
 alias drmi="  docker rmi"
-alias drmia=" docker rmi   $(docker images -aq)"    # Remove all images
-alias drmif=" docker rmi   $(docker images -q -f dangling=true)"  # Remove dangling images
+
+drmia() {     docker rmi $(docker images -aq)       }  # Remove All Images
+drmif() {                                              # Remove All dangling images
+ local images=$(docker images -q -f dangling=true)
+ if [ -n "$images" ]; then
+   echo "Removing dangling images: $images"
+   docker rmi $images
+ else
+   echo "No dangling images to remove."
+ fi
+}
 
 # --- Container Management ---
 alias dps="   docker ps     --format 'table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'"
 alias dpsa="  docker ps -a  --format 'table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'"
 alias dpsaq=" docker ps -aq --format 'table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'"
+
 alias dst="   docker start"
-alias dsta="  docker start $(docker ps -aq)"
 alias dsp="   docker stop"
-alias dspa="  docker stop  $(docker ps -aq)"
 alias drm="   docker rm"
-alias drma="  docker rm    $(docker ps -aq)"
+
+dsta() {      docker start $(docker ps -aq)   }  # Start  All Containers
+dspa() {      docker stop  $(docker ps -aq)   }  # Stop   All Containers
+drma() {      docker rm    $(docker ps -aq)   }  # Remove All Containers
 
 # --- Docker Compose Commands ---
 alias dcu="   docker compose up   -d --build"
 alias dcd="   docker compose down"
 
 # --- Docker Exec Bash ---
-deb() {
-  docker exec -it "$1" bash
-}
+deb() {       docker exec -it "$1" bash   }
 ```
 
 These shortcuts provide:
