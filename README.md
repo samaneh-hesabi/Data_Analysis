@@ -475,17 +475,23 @@ Make sure the container status is "Up" and port 8888 is mapped.
 
 ### 4.9. Step 9: Attach VS Code to the Container
 
-- Open VS Code and press Ctrl+Shift+P.
-- Select "Dev Containers: Attach to Running Container…".
-- Choose the container named "your-project_container".  A new VS Code window will be opened.
-- In VS Code, press open folder. Then, in the top box, you will see /root. Delete root to see app. Finally, you will see all your project files, including data_prep.py and exploratory_analysis.ipynb.
+Follow these steps carefully:
+
+1. Press `Ctrl+Shift+P` to open the command palette.
+2. Type and select `Dev Containers: Attach to Running Container…`.
+3. Choose the container named `your-project_name`. A second VS Code window will open.
+4. In the second VS Code window, click `Open Folder`. In the top box, you will see `/root`. Delete `root` to reveal `app`. Select `app` and click `OK`. You will then see all your project's folders and files.
+5. In the second VS Code window, install the following extensions: `Docker`, `Dev Containers`, `Python`, and `Jupyter`. If you see a `Reload the window` button after installing each extension, make sure to click it every time.
+6. You are all set and can continue.
+
+**Note**: In `Step 11`, if you cannot select the kernel, close the second VS Code window and repeat steps 1, 2, 3, and 4. The correct kernel will then be automatically attached to the notebooks.
 
 ### 4.10. Step 10: Run the Python Script
 
-In the VS Code terminal (inside the container), run:
+In the VS Code terminal, open the terminal. You will see a bash which means you are inside the container. Run:
 
 ```
-python data_prep.py
+python scripts/data_prep.py
 ```
 
 You should see the expected output (for example, "hi").
@@ -493,9 +499,8 @@ You should see the expected output (for example, "hi").
 ### 4.11. Step 11: Work with Jupyter Notebooks in VS Code
 
 - Open exploratory_analysis.ipynb in VS Code.
-- In VS Code, install the following extensions: Docker, Dev Containers, Python, Jupyter.
-- VS Code will prompt you to select a kernel. Choose the Python kernel that is specified in the Dockerfile. The Libraries that have been listed in the requirements.txt and installed in the docker will be run automatically.
-- Now you can run and edit cells directly in VS Code.
+- In the top-right corner of the notebook, you should see a kernel with the same name as your project. If not, click the `Select Kerne`l button and choose the `Jupyter kernel` option. This will display a kernel with your project's name and the Python kernel specified in the Dockerfile. The libraries from the `requirements.txt` file, installed in the Docker container, will be automatically available for use.
+- You can now run and edit cells within the container.
 
 ### 4.12. Step 12: Stop and remove the container
 
