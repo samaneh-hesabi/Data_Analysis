@@ -1,3 +1,156 @@
+<div style="font-size:2.5em; font-weight:bold; text-align:center; margin-top:20px;">Data Science Project Template</div>
+
+<div style="text-align:center; margin-bottom:20px;">
+A comprehensive template for data science projects with Docker, Jupyter Notebooks, and Python.
+</div>
+
+## 1. Project Overview
+
+This project template provides a complete environment for data science and machine learning projects using Docker containers. It includes:
+
+- Python 3.9 with essential data science libraries
+- Jupyter Notebook and JupyterLab support
+- Pre-configured Docker environment
+- Organized project structure
+- Development tools and utilities
+
+### 1.1. Key Features
+
+- **Containerized Environment**: All dependencies are managed through Docker
+- **Jupyter Integration**: Ready-to-use Jupyter Notebook and JupyterLab
+- **Project Structure**: Organized directories for data, notebooks, scripts, and models
+- **Development Tools**: VS Code integration and development utilities
+- **Reproducibility**: Docker ensures consistent environments across different machines
+
+### 1.2. Project Structure
+
+```
+.
+├── data/              # Raw and processed data
+├── figures/           # Generated plots and visualizations
+├── models/            # Trained models and model artifacts
+├── notebooks/         # Jupyter notebooks for analysis
+├── results/           # Analysis results and outputs
+├── scripts/           # Python scripts and utilities
+├── .dockerignore      # Docker ignore patterns
+├── .gitignore         # Git ignore patterns
+├── Dockerfile         # Docker image configuration
+├── docker-compose.yml # Docker service configuration
+├── LICENSE            # Project license
+├── README.md          # Project documentation
+├── requirements.txt   # Python dependencies
+└── start.sh           # Project startup script
+```
+
+### 1.3. Python Environment
+
+The project uses Python 3.9 with the following key dependencies:
+
+- **Data Processing**: numpy, pandas
+- **Machine Learning**: scikit-learn, xgboost
+- **Visualization**: matplotlib, seaborn
+- **Development**: ipykernel, jupyter, jupyterlab
+
+All dependencies are specified in `requirements.txt` and are automatically installed when building the Docker image.
+
+### 1.4. Getting Started
+
+1. **Prerequisites**:
+   - Docker Desktop installed
+   - Git installed
+   - VS Code with Docker extension (recommended)
+
+2. **Clone the Repository**:
+   ```bash
+   git clone <repository-url>
+   cd <project-directory>
+   ```
+
+3. **Start the Environment**:
+   ```bash
+   # Make start.sh executable
+   chmod +x start.sh
+   
+   # Start the environment
+   ./start.sh
+   ```
+
+4. **Access Jupyter Notebook**:
+   - Open your browser and navigate to `http://localhost:8888`
+   - Or use VS Code's Jupyter extension
+
+5. **Stop the Environment**:
+   ```bash
+   docker-compose down
+   ```
+
+### 1.5. Development Workflow
+
+#### Best Practices
+
+1. **Data Management**:
+   - Store raw data in `data/raw/`
+   - Save processed data in `data/processed/`
+   - Use relative paths in notebooks and scripts
+   - Never commit large data files to Git
+
+2. **Notebook Development**:
+   - Keep notebooks focused and modular
+   - Document assumptions and data sources
+   - Use markdown cells for explanations
+   - Convert frequently used code to Python scripts
+
+3. **Model Development**:
+   - Save model artifacts in `models/`
+   - Document model parameters and performance
+   - Use version control for model files
+   - Include evaluation metrics in results
+
+4. **Code Organization**:
+   - Place reusable functions in `scripts/`
+   - Use meaningful file and function names
+   - Add docstrings to functions
+   - Follow PEP 8 style guide
+
+5. **Version Control**:
+   - Make frequent, small commits
+   - Write descriptive commit messages
+   - Use feature branches for new work
+   - Keep the main branch stable
+
+#### Directory Usage Guidelines
+
+- `data/`: Store all data files
+  - `raw/`: Original, unprocessed data
+  - `processed/`: Cleaned and transformed data
+  - `external/`: Third-party data sources
+
+- `notebooks/`: Jupyter notebooks
+  - `exploratory/`: Initial data exploration
+  - `analysis/`: Statistical analysis
+  - `modeling/`: Machine learning models
+
+- `scripts/`: Python modules
+  - `data/`: Data processing scripts
+  - `features/`: Feature engineering
+  - `models/`: Model training and evaluation
+  - `visualization/`: Plotting utilities
+
+- `models/`: Trained models
+  - Save model artifacts with version numbers
+  - Include model metadata and parameters
+  - Document model performance
+
+- `results/`: Analysis outputs
+  - Tables and figures
+  - Performance metrics
+  - Reports and presentations
+
+- `figures/`: Generated plots
+  - Use consistent naming
+  - Include source data
+  - Document plot parameters
+
 ## 🧰 How to Use This Template    
 
 Click the green **"Use this template"** button at the top of the page, then choose **"Create a new repository"**.   

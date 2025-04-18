@@ -1,43 +1,195 @@
-# Scripts Folder
+<div style="font-size:2.5em; font-weight:bold; text-align:center; margin-top:20px;">California Housing Price Prediction Project</div>
 
-This folder contains Python scripts for the Docker Data Science project.
+This project implements a complete machine learning pipeline for predicting California housing prices using various regression models. The project is structured as a modular system with clear separation of concerns between data preparation, model training, and evaluation.
 
-## Contents
+# 1. Project Overview
 
-- `data_prep.py`: A sample Python script for data preparation and preprocessing. This script demonstrates how to process data within the Docker environment using common data science libraries.
+## 1.1 Purpose
+This project demonstrates a complete data science workflow for predicting California housing prices using machine learning. It includes:
+- Data preprocessing and feature engineering
+- Multiple model implementations and comparison
+- Model evaluation and testing
+- Visualization of results
+- Production-ready model deployment
 
-## Usage
+## 1.2 Dataset
+The project uses the California Housing dataset from scikit-learn, which contains:
+- 8 features describing housing characteristics
+- Target variable: Median house value
+- 20,640 samples
+- Features include:
+  - MedInc: Median income
+  - HouseAge: House age
+  - AveRooms: Average rooms
+  - AveBedrms: Average bedrooms
+  - Population: Neighborhood population
+  - AveOccup: Average occupancy
+  - Latitude: Location latitude
+  - Longitude: Location longitude
 
-Scripts in this folder can be executed:
+# 2. Project Structure
 
-1. From the command line within the Docker container:
-   ```bash
-   python data_prep.py
-   ```
+## 2.1 Core Scripts
 
-2. From VS Code when connected to the container
-3. As imported modules in other scripts or notebooks
+### data_prep.py
+- **Purpose**: Data loading and initial preprocessing
+- **Key Functions**:
+  - Loads California Housing dataset
+  - Sets up display options
+  - Creates initial DataFrame
+- **Dependencies**: pandas, numpy, matplotlib, seaborn, scikit-learn
 
-## Purpose
+### ml_models.py
+- **Purpose**: Model training and evaluation
+- **Key Functions**:
+  - `load_data()`: Loads and prepares dataset
+  - `preprocess_data()`: Handles data splitting and scaling
+  - `train_and_evaluate_models()`: Trains multiple models and evaluates performance
+  - `plot_model_comparison()`: Visualizes model performance
+- **Models Implemented**:
+  - Linear Regression
+  - Random Forest
+  - Support Vector Regression (SVR)
+  - XGBoost
+- **Outputs**:
+  - Trained models (saved as .joblib files)
+  - Performance metrics
+  - Comparison plots
+  - Feature importance visualization
 
-The scripts folder serves several important functions:
+### test_model.py
+- **Purpose**: Model testing and prediction
+- **Key Functions**:
+  - `load_model_and_scaler()`: Loads trained model and scaler
+  - `prepare_new_data()`: Generates realistic test data
+  - `predict_house_values()`: Makes predictions and analyzes results
+- **Features**:
+  - Realistic data generation
+  - Comprehensive prediction analysis
+  - Detailed results output
+  - Error handling
 
-- Contains reusable code modules for data science tasks
-- Houses production-ready implementations of analyses
-- Provides utilities for data processing, model training, and evaluation
-- Stores command-line tools for automation within the Docker environment
+## 2.2 Directory Structure
+```
+project/
+├── scripts/
+│   ├── data_prep.py
+│   ├── ml_models.py
+│   ├── test_model.py
+│   └── README.md
+├── models/
+│   ├── random_forest_model.joblib
+│   └── scaler.joblib
+├── figures/
+│   ├── model_comparison.png
+│   └── feature_importance.png
+└── results/
+    └── test_predictions.csv
+```
 
-## Best Practices
+# 3. Usage Guide
 
-- Include docstrings and comments to document functionality
-- Implement proper error handling
-- Use logging instead of print statements
-- Structure scripts to be importable as modules when appropriate
-- Consider using a structure like:
-  ```python
-  def main():
-      # Main script functionality
-      
-  if __name__ == "__main__":
-      main()
-  ``` 
+## 3.1 Setup
+1. Install required dependencies:
+```bash
+pip install pandas numpy scikit-learn matplotlib seaborn xgboost joblib
+```
+
+2. Create necessary directories:
+```bash
+mkdir -p models figures results
+```
+
+## 3.2 Running the Pipeline
+
+1. Data Preparation:
+```bash
+python scripts/data_prep.py
+```
+
+2. Model Training:
+```bash
+python scripts/ml_models.py
+```
+
+3. Model Testing:
+```bash
+python scripts/test_model.py
+```
+
+## 3.3 Expected Outputs
+- Trained models in `models/` directory
+- Performance visualizations in `figures/` directory
+- Prediction results in `results/` directory
+
+# 4. Technical Details
+
+## 4.1 Data Preprocessing
+- Feature scaling using StandardScaler
+- Train-test split (80-20)
+- Data validation and cleaning
+
+## 4.2 Model Implementation
+- Multiple regression models for comparison
+- Cross-validation for robust evaluation
+- Hyperparameter tuning (where applicable)
+- Feature importance analysis
+
+## 4.3 Evaluation Metrics
+- Mean Squared Error (MSE)
+- R-squared (R²) score
+- Visual comparison of model performance
+- Feature importance visualization
+
+# 5. Best Practices
+
+## 5.1 Code Organization
+- Modular design
+- Clear function documentation
+- Proper error handling
+- Logging implementation
+
+## 5.2 Model Management
+- Model versioning
+- Scalability considerations
+- Production readiness
+- Performance optimization
+
+## 5.3 Documentation
+- Comprehensive docstrings
+- Clear README
+- Usage examples
+- Maintenance guidelines
+
+# 6. Future Improvements
+
+## 6.1 Planned Enhancements
+- Hyperparameter optimization
+- Additional model architectures
+- Advanced feature engineering
+- API integration
+- Real-time prediction capabilities
+
+## 6.2 Scalability Considerations
+- Batch processing support
+- Distributed computing
+- Cloud deployment
+- Model monitoring
+
+# 7. Contributing
+
+## 7.1 Guidelines
+- Follow PEP 8 style guide
+- Write unit tests
+- Document all changes
+- Use meaningful commit messages
+
+## 7.2 Development Workflow
+1. Create feature branch
+2. Implement changes
+3. Run tests
+4. Update documentation
+5. Create pull request
+
+# 8. License
+This project is licensed under the MIT License - see the LICENSE file for details. 
