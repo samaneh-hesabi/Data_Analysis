@@ -82,12 +82,6 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test):
         print(f"\n{name} Results:")
         print(f"Mean Squared Error: {mse:.4f}")
         print(f"R2 Score: {r2:.4f}")
-        
-        # Save the best performing model (Random Forest)
-        if name == 'Random Forest':
-            model_path = MODELS_DIR / 'random_forest_model.joblib'
-            joblib.dump(model, model_path)
-            print(f"Saved Random Forest model to {model_path}")
     
     return results
 

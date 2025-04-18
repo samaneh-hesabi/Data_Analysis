@@ -77,9 +77,6 @@ project/
 │   ├── ml_models.py
 │   ├── test_model.py
 │   └── README.md
-├── models/
-│   ├── random_forest_model.joblib
-│   └── scaler.joblib
 ├── figures/
 │   ├── model_comparison.png
 │   └── feature_importance.png
@@ -192,4 +189,10 @@ python scripts/test_model.py
 5. Create pull request
 
 # 8. License
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Model Files
+- `ml_models.py`: Contains functions for training and evaluating machine learning models
+- `test_model.py`: Contains functions for testing trained models on new data
+
+Note: Models are not stored in the repository. They can be trained using the provided scripts. 

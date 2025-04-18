@@ -4,19 +4,7 @@ from sklearn.preprocessing import StandardScaler
 import joblib
 import os
 from pathlib import Path
-
-def load_model_and_scaler():
-    """Load the trained model and scaler"""
-    # Use proper path handling
-    model_path = Path('models/random_forest_model.joblib')
-    scaler_path = Path('models/scaler.joblib')
-    
-    if not model_path.exists() or not scaler_path.exists():
-        raise FileNotFoundError("Model or scaler files not found. Please train the model first.")
-    
-    model = joblib.load(model_path)
-    scaler = joblib.load(scaler_path)
-    return model, scaler
+from sklearn.metrics import mean_squared_error, r2_score
 
 def prepare_new_data(n_samples=100):
     """Create a realistic new dataset for testing
@@ -74,59 +62,55 @@ def prepare_new_data(n_samples=100):
     
     return new_data
 
-def predict_house_values():
-    """Make predictions on new data and analyze results"""
-    try:
-        # Load model and scaler
-        print("Loading model and scaler...")
-        model, scaler = load_model_and_scaler()
-        
-        # Prepare new data
-        print("\nGenerating new test data...")
-        new_data = prepare_new_data(n_samples=100)
-        
-        # Scale the features
-        print("Scaling features...")
-        scaled_data = scaler.transform(new_data)
-        
-        # Make predictions
-        print("Making predictions...")
-        predictions = model.predict(scaled_data)
-        
-        # Add predictions to the dataset
-        results = new_data.copy()
-        results['Predicted_House_Value'] = predictions
-        
-        # Print summary statistics
-        print("\nPrediction Summary Statistics:")
-        print("=" * 50)
-        print(f"Number of samples: {len(predictions)}")
-        print(f"Average predicted house value: ${predictions.mean():.2f} (in $100,000s)")
-        print(f"Min predicted house value: ${predictions.min():.2f} (in $100,000s)")
-        print(f"Max predicted house value: ${predictions.max():.2f} (in $100,000s)")
-        
-        # Print detailed results for first 5 samples
-        print("\nDetailed Results (First 5 Samples):")
-        print("=" * 50)
-        for idx in range(5):
-            print(f"\nSample {idx + 1}:")
-            print(f"Predicted House Value: ${predictions[idx]:.2f} (in $100,000s)")
-            print("Features:")
-            for feature in new_data.columns:
-                print(f"  {feature}: {new_data.iloc[idx][feature]}")
-        
-        # Save results to CSV
-        output_dir = Path('results')
-        output_dir.mkdir(exist_ok=True)
-        output_path = output_dir / 'test_predictions.csv'
-        results.to_csv(output_path, index=False)
-        print(f"\nSaved detailed results to: {output_path}")
-        
-        return results
-        
-    except Exception as e:
-        print(f"Error during prediction: {str(e)}")
-        return None
+def test_model(model, scaler, test_data):
+    """
+    Test the trained model on new data
+    
+    Parameters:
+    -----------
+    model : sklearn model
+        Trained model to test
+    scaler : sklearn scaler
+        Fitted scaler for feature transformation
+    test_data : pd.DataFrame
+        Test data to evaluate the model on
+    
+    Returns:
+    --------
+    dict
+        Dictionary containing test metrics
+    """
+    # Scale the features
+    scaled_data = scaler.transform(test_data)
+    
+    # Make predictions
+    predictions = model.predict(scaled_data)
+    
+    # Calculate metrics
+    mse = mean_squared_error(test_data['MedHouseVal'], predictions)
+    r2 = r2_score(test_data['MedHouseVal'], predictions)
+    
+    print(f"Test Results:")
+    print(f"Mean Squared Error: {mse:.4f}")
+    print(f"R2 Score: {r2:.4f}")
+    
+    return {
+        'mse': mse,
+        'r2': r2,
+        'predictions': predictions
+    }
 
 if __name__ == "__main__":
-    predict_house_values() 
+    # Example usage
+    from ml_models import load_data, preprocess_data, train_and_evaluate_models
+    
+    # Load and preprocess data
+    df = load_data()
+    X_train, X_test, y_train, y_test, scaler = preprocess_data(df)
+    
+    # Train models
+    results = train_and_evaluate_models(X_train, X_test, y_train, y_test)
+    
+    # Test with new data
+    new_data = prepare_new_data(n_samples=100)
+    test_results = test_model(results['Random Forest'], scaler, new_data) 
