@@ -1,167 +1,139 @@
-<div style="font-size:2.5em; font-weight:bold; text-align:center; margin-top:20px;">Data Science Project Template</div>
-
-<div style="text-align:center; margin-bottom:20px;">
-A comprehensive template for data science projects with Docker, Jupyter Notebooks, and Python.
-</div>
+<div style="font-size:2.5em; font-weight:bold; text-align:center; margin-top:20px;">Data Analysis Project</div>
 
 ## 1. Project Overview
+This project implements a comprehensive data analysis and machine learning pipeline using Docker for environment management. The system includes data preprocessing, exploratory analysis, model training, and prediction capabilities.
 
-This project template provides a complete environment for data science and machine learning projects using Docker containers. It includes:
-
-- Python 3.9 with essential data science libraries
-- Jupyter Notebook and JupyterLab support
-- Pre-configured Docker environment
-- Organized project structure
-- Development tools and utilities
-
-### 1.1. Key Features
-
-- **Containerized Environment**: All dependencies are managed through Docker
-- **Jupyter Integration**: Ready-to-use Jupyter Notebook and JupyterLab
-- **Project Structure**: Organized directories for data, notebooks, scripts, and models
-- **Development Tools**: VS Code integration and development utilities
-- **Reproducibility**: Docker ensures consistent environments across different machines
-
-### 1.2. Project Structure
-
+## 2. Directory Structure
 ```
 .
-├── data/              # Raw and processed data
-├── figures/           # Generated plots and visualizations
-├── models/            # Trained models and model artifacts
-├── notebooks/         # Jupyter notebooks for analysis
-├── results/           # Analysis results and outputs
-├── scripts/           # Python scripts and utilities
-├── .dockerignore      # Docker ignore patterns
-├── .gitignore         # Git ignore patterns
-├── Dockerfile         # Docker image configuration
-├── docker-compose.yml # Docker service configuration
-├── LICENSE            # Project license
-├── README.md          # Project documentation
-├── requirements.txt   # Python dependencies
-└── start.sh           # Project startup script
+├── data/                    # Raw and processed data files
+│   ├── README.md           # Data documentation
+│   └── sample.csv          # Sample dataset
+├── figures/                # Generated visualizations
+│   └── README.md          # Figures documentation
+├── models/                 # Trained models and scalers
+│   ├── random_forest_model.joblib  # Trained random forest model
+│   └── scaler.joblib      # Feature scaler for preprocessing
+├── notebooks/              # Jupyter notebooks
+│   ├── README.md          # Notebooks documentation
+│   └── exploratory_analysis.ipynb  # Data exploration notebook
+├── results/                # Analysis outputs
+│   ├── README.md          # Results documentation
+│   └── test_predictions.csv  # Model predictions
+├── scripts/                # Python scripts
+│   └── README.md          # Scripts documentation
+├── .dockerignore          # Docker ignore file
+├── .gitignore            # Git ignore file
+├── docker-compose.yml     # Docker compose configuration
+├── Dockerfile            # Docker image definition
+├── LICENSE               # License information
+├── README.md            # Project documentation
+├── requirements.txt     # Python dependencies
+└── start.sh            # Startup script
 ```
 
-### 1.3. Python Environment
+## 3. Features
+- Docker-based environment management
+- Data preprocessing and feature engineering
+- Exploratory data analysis
+- Machine learning model training and evaluation
+- Automated prediction pipeline
+- Comprehensive documentation
 
-The project uses Python 3.9 with the following key dependencies:
-
-- **Data Processing**: numpy, pandas
-- **Machine Learning**: scikit-learn, xgboost
-- **Visualization**: matplotlib, seaborn
-- **Development**: ipykernel, jupyter, jupyterlab
-
-All dependencies are specified in `requirements.txt` and are automatically installed when building the Docker image.
-
-### 1.4. Getting Started
-
-1. **Prerequisites**:
-   - Docker Desktop installed
-   - Git installed
-   - VS Code with Docker extension (recommended)
-
-2. **Clone the Repository**:
+## 4. Usage
+1. Ensure Docker is installed on your system
+2. Clone this repository
+3. Run the startup script:
    ```bash
-   git clone <repository-url>
-   cd <project-directory>
-   ```
-
-3. **Start the Environment**:
-   ```bash
-   # Make start.sh executable
-   chmod +x start.sh
-   
-   # Start the environment
    ./start.sh
    ```
+4. Access Jupyter notebooks through your browser
+5. Run analysis scripts as needed
 
-4. **Access Jupyter Notebook**:
-   - Open your browser and navigate to `http://localhost:8888`
-   - Or use VS Code's Jupyter extension
+## 5. Dependencies
+All required dependencies are listed in `requirements.txt` and will be automatically installed when building the Docker container.
 
-5. **Stop the Environment**:
+## 6. Model Details
+The system uses a Random Forest model with the following features:
+- Data preprocessing and scaling
+- Feature selection
+- Model training and evaluation
+- Prediction generation
+
+## 7. Docker Setup
+### 7.1. Prerequisites
+- Docker Desktop with WSL integration (Windows)
+- Visual Studio Code
+- Required VS Code extensions:
+  - Docker
+  - Remote - Containers
+  - Python
+  - Jupyter
+
+### 7.2. Quick Start
+1. Build and start the container:
    ```bash
-   docker-compose down
+   docker-compose up --build -d
    ```
+2. Attach VS Code to the container:
+   - Press `Ctrl+Shift+P`
+   - Select `Dev Containers: Attach to Running Container...`
+   - Choose your project container
+   - Open the `/app` folder
 
-### 1.5. Development Workflow
+### 7.3. Container Management
+- Start container: `docker-compose up -d`
+- Stop container: `docker-compose down`
+- Rebuild container: `docker-compose up --build -d`
+- View container status: `docker-compose ps`
 
-#### Best Practices
+## 8. Development Workflow
+### 8.1. Python Scripts
+- Place scripts in the `scripts/` directory
+- Run scripts from the container terminal:
+  ```bash
+  python scripts/your_script.py
+  ```
 
-1. **Data Management**:
-   - Store raw data in `data/raw/`
-   - Save processed data in `data/processed/`
-   - Use relative paths in notebooks and scripts
-   - Never commit large data files to Git
+### 8.2. Jupyter Notebooks
+- Access notebooks at `localhost:8888`
+- Use VS Code's Jupyter extension for development
+- Ensure kernel selection matches your project name
 
-2. **Notebook Development**:
-   - Keep notebooks focused and modular
-   - Document assumptions and data sources
-   - Use markdown cells for explanations
-   - Convert frequently used code to Python scripts
+### 8.3. Data Management
+- Raw data goes in `data/` directory
+- Processed data and results in `results/` directory
+- Models and scalers in `models/` directory
 
-3. **Model Development**:
-   - Save model artifacts in `models/`
-   - Document model parameters and performance
-   - Use version control for model files
-   - Include evaluation metrics in results
+## 9. Best Practices
+- Keep `requirements.txt` up-to-date
+- Use semantic versioning for models
+- Document all data preprocessing steps
+- Maintain clean and organized directory structure
+- Regular commits with descriptive messages
 
-4. **Code Organization**:
-   - Place reusable functions in `scripts/`
-   - Use meaningful file and function names
-   - Add docstrings to functions
-   - Follow PEP 8 style guide
+## 10. Troubleshooting
+### 10.1. Common Issues
+- Port conflicts: Check if port 8888 is available
+- Container won't start: Verify Docker installation
+- VS Code connection issues: Check container status
+- Kernel selection problems: Restart VS Code window
 
-5. **Version Control**:
-   - Make frequent, small commits
-   - Write descriptive commit messages
-   - Use feature branches for new work
-   - Keep the main branch stable
+### 10.2. Solutions
+- Port conflict: Change port in `docker-compose.yml`
+- Container issues: Run `docker-compose down` and rebuild
+- VS Code issues: Reattach to container
+- Kernel issues: Select correct project kernel
 
-#### Directory Usage Guidelines
+## 11. Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-- `data/`: Store all data files
-  - `raw/`: Original, unprocessed data
-  - `processed/`: Cleaned and transformed data
-  - `external/`: Third-party data sources
-
-- `notebooks/`: Jupyter notebooks
-  - `exploratory/`: Initial data exploration
-  - `analysis/`: Statistical analysis
-  - `modeling/`: Machine learning models
-
-- `scripts/`: Python modules
-  - `data/`: Data processing scripts
-  - `features/`: Feature engineering
-  - `models/`: Model training and evaluation
-  - `visualization/`: Plotting utilities
-
-- `models/`: Trained models
-  - Save model artifacts with version numbers
-  - Include model metadata and parameters
-  - Document model performance
-
-- `results/`: Analysis outputs
-  - Tables and figures
-  - Performance metrics
-  - Reports and presentations
-
-- `figures/`: Generated plots
-  - Use consistent naming
-  - Include source data
-  - Document plot parameters
-
-## 🧰 How to Use This Template    
-
-Click the green **"Use this template"** button at the top of the page, then choose **"Create a new repository"**.   
-
-This will create your own copy of this project, which you can modify freely — no need to fork!   
-
----    
-
-<div align="center">
-    <img src="figures/logo.png" alt="logo" width="50%">
-</div>
+## 12. License
+This project is licensed under the terms specified in the LICENSE file.
 
 # Docker for Data Science Projects
 
