@@ -7,21 +7,10 @@ This project implements a comprehensive data analysis and machine learning pipel
 ```
 .
 ├── data/                    # Raw and processed data files
-│   ├── README.md           # Data documentation
-│   └── sample.csv          # Sample dataset
 ├── figures/                # Generated visualizations
-│   └── README.md          # Figures documentation
-├── models/                 # Trained models and scalers
-│   ├── random_forest_model.joblib  # Trained random forest model
-│   └── scaler.joblib      # Feature scaler for preprocessing
 ├── notebooks/              # Jupyter notebooks
-│   ├── README.md          # Notebooks documentation
-│   └── exploratory_analysis.ipynb  # Data exploration notebook
-├── results/                # Analysis outputs
-│   ├── README.md          # Results documentation
-│   └── test_predictions.csv  # Model predictions
 ├── scripts/                # Python scripts
-│   └── README.md          # Scripts documentation
+├── venv/                   # Virtual environment
 ├── .dockerignore          # Docker ignore file
 ├── .gitignore            # Git ignore file
 ├── docker-compose.yml     # Docker compose configuration
@@ -40,28 +29,28 @@ This project implements a comprehensive data analysis and machine learning pipel
 - Automated prediction pipeline
 - Comprehensive documentation
 
-## 4. Usage
+## 4. Dependencies
+The project uses the following key Python packages:
+- numpy>=1.21.0
+- pandas>=1.3.0
+- scikit-learn>=1.0.0
+- xgboost>=1.5.0
+- matplotlib>=3.4.0
+- seaborn>=0.11.0
+- ipykernel (for Jupyter notebooks)
+
+## 5. Quick Start
 1. Ensure Docker is installed on your system
 2. Clone this repository
 3. Run the startup script:
    ```bash
    ./start.sh
    ```
-4. Access Jupyter notebooks through your browser
+4. Access Jupyter notebooks through your browser at `localhost:8888`
 5. Run analysis scripts as needed
 
-## 5. Dependencies
-All required dependencies are listed in `requirements.txt` and will be automatically installed when building the Docker container.
-
-## 6. Model Details
-The system uses a Random Forest model with the following features:
-- Data preprocessing and scaling
-- Feature selection
-- Model training and evaluation
-- Prediction generation
-
-## 7. Docker Setup
-### 7.1. Prerequisites
+## 6. Docker Setup
+### 6.1. Prerequisites
 - Docker Desktop with WSL integration (Windows)
 - Visual Studio Code
 - Required VS Code extensions:
@@ -70,69 +59,58 @@ The system uses a Random Forest model with the following features:
   - Python
   - Jupyter
 
-### 7.2. Quick Start
-1. Build and start the container:
-   ```bash
-   docker-compose up --build -d
-   ```
-2. Attach VS Code to the container:
-   - Press `Ctrl+Shift+P`
-   - Select `Dev Containers: Attach to Running Container...`
-   - Choose your project container
-   - Open the `/app` folder
-
-### 7.3. Container Management
+### 6.2. Container Management
 - Start container: `docker-compose up -d`
 - Stop container: `docker-compose down`
 - Rebuild container: `docker-compose up --build -d`
 - View container status: `docker-compose ps`
 
-## 8. Development Workflow
-### 8.1. Python Scripts
+## 7. Development Workflow
+### 7.1. Python Scripts
 - Place scripts in the `scripts/` directory
 - Run scripts from the container terminal:
   ```bash
   python scripts/your_script.py
   ```
 
-### 8.2. Jupyter Notebooks
+### 7.2. Jupyter Notebooks
 - Access notebooks at `localhost:8888`
 - Use VS Code's Jupyter extension for development
 - Ensure kernel selection matches your project name
 
-### 8.3. Data Management
+### 7.3. Data Management
 - Raw data goes in `data/` directory
 - Processed data and results in `results/` directory
 - Models and scalers in `models/` directory
 
-## 9. Best Practices
+## 8. Best Practices
 - Keep `requirements.txt` up-to-date
 - Use semantic versioning for models
 - Document all data preprocessing steps
 - Maintain clean and organized directory structure
 - Regular commits with descriptive messages
 
-## 10. Troubleshooting
-### 10.1. Common Issues
+## 9. Troubleshooting
+### 9.1. Common Issues
 - Port conflicts: Check if port 8888 is available
 - Container won't start: Verify Docker installation
 - VS Code connection issues: Check container status
 - Kernel selection problems: Restart VS Code window
 
-### 10.2. Solutions
+### 9.2. Solutions
 - Port conflict: Change port in `docker-compose.yml`
 - Container issues: Run `docker-compose down` and rebuild
 - VS Code issues: Reattach to container
 - Kernel issues: Select correct project kernel
 
-## 11. Contributing
+## 10. Contributing
 1. Fork the repository
 2. Create a feature branch
 3. Commit your changes
 4. Push to the branch
 5. Create a Pull Request
 
-## 12. License
+## 11. License
 This project is licensed under the terms specified in the LICENSE file.
 
 # Docker for Data Science Projects
